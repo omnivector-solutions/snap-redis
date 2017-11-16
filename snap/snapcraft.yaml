@@ -11,8 +11,6 @@ apps:
   redis-server:
     command: wrappers/redis-server
     daemon: simple
-  redis-cli:
-    command: wrappers/redis-cli
 
 parts:
   redis-server:
