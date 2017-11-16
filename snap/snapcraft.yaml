@@ -22,9 +22,9 @@ parts:
     make-install-var: PREFIX
     install: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/etc/redis
-      echo "dir /var/snap/redis-server/common/var/lib/redis" >> ./redis.conf
+      echo "dir /var/snap/redis-bdx/common/var/lib/redis" >> ./redis.conf
       echo "dbfilename dump.rdb" >> ./redis.conf
-      echo "include /var/snap/redis-server/common/etc/redis/redis.conf" >> ./redis.conf
+      echo "include /var/snap/redis-bdx/common/etc/redis/redis.conf" >> ./redis.conf
       cp ./redis.conf $SNAPCRAFT_PART_INSTALL/etc/redis/
   wrappers:
     plugin: dump
