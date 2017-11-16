@@ -1,0 +1,31 @@
+name: redis-server
+version: '0.1' 
+summary: In-memory data structure store, used as a database, cache and message broker.
+description: |
+  Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
+
+grade: stable
+confinement: classic
+
+apps:
+  redis-server:
+    command: wrappers/redis-server
+    daemon: simple
+  redis-cli:
+    command: wrappers/redis-cli
+
+parts:
+  redis-server:
+    plugin: make
+    source: https://github.com/antirez/redis.git
+    source-tag: 4.0.2
+    make-install-var: PREFIX
+    install: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/etc/redis
+      echo "dir /var/snap/redis-server/common/var/lib/redis" >> ./redis.conf
+      echo "dbfilename dump.rdb" >> ./redis.conf
+      echo "include /var/snap/redis-server/common/etc/redis/redis.conf" >> ./redis.conf
+      cp ./redis.conf $SNAPCRAFT_PART_INSTALL/etc/redis/
+  wrappers:
+    plugin: dump
+    source: snap/

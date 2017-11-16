@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eux
+
+# setup root-writable versioned dirs
+mkdir -p ${SNAP_COMMON}/etc/redis
+mkdir -p ${SNAP_COMMON}/var/lib/redis
+
+# setup redis config
+if [ -e "${SNAP_COMMON}/etc/redis/redis.conf" ]; then
+    echo "redis user defined config exists"
+else
+    touch "${SNAP_COMMON}/etc/redis/redis.conf"
+    #cp -a ${SNAP}/etc/redis/redis.conf ${SNAP_COMMON}/etc/redis/redis.conf
+fi
