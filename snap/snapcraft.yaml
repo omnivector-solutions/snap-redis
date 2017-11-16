@@ -1,4 +1,4 @@
-name: redis-server
+name: redis-bdx
 version: '0.1' 
 summary: In-memory data structure store, used as a database, cache and message broker.
 description: |
