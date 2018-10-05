@@ -1,25 +1,32 @@
 name: redis-bdx
-version: '0.1' 
+version: '4.0.11'
 summary: In-memory data structure store, used as a database, cache and message broker.
 description: |
   Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
 grade: stable
-confinement: classic
+confinement: strict
 
 apps:
   redis-server:
     command: wrappers/redis-server
     daemon: simple
+    plugs:
+      - network
+      - network-bind
   redis-cli:
     command: wrappers/redis-cli
+    plugs:
+      - network
 
 parts:
   redis-server:
     plugin: make
     source: https://github.com/antirez/redis.git
-    source-tag: 4.0.2
+    source-tag: 4.0.11
     make-install-var: PREFIX
+    build-packages:
+    - build-essential
     install: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/etc/redis
       echo "dir /var/snap/redis-bdx/common/var/lib/redis" >> ./redis.conf
