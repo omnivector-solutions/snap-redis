@@ -1,5 +1,5 @@
 name: redis-bdx
-version: '4.0.11'
+version: '5.0.0'
 summary: In-memory data structure store, used as a database, cache and message broker.
 description: |
   Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
@@ -23,7 +23,7 @@ parts:
   redis-server:
     plugin: make
     source: https://github.com/antirez/redis.git
-    source-tag: 4.0.11
+    source-tag: 5.0.0
     make-install-var: PREFIX
     build-packages:
     - build-essential
