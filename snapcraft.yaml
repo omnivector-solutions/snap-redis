@@ -1,11 +1,13 @@
 name: redis-bdx
-version: '5.0.0'
+version: '5.0.5'
 summary: In-memory data structure store, used as a database, cache and message broker.
 description: |
   Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.
 
 grade: stable
 confinement: strict
+
+base: core18
 
 apps:
   redis-server:
@@ -23,11 +25,12 @@ parts:
   redis-server:
     plugin: make
     source: https://github.com/antirez/redis.git
-    source-tag: 5.0.0
+    source-tag: 5.0.5
     make-install-var: PREFIX
     build-packages:
     - build-essential
-    install: |
+    override-build: |
+      snapcraftctl build
       mkdir -p $SNAPCRAFT_PART_INSTALL/etc/redis
       echo "dir /var/snap/redis-bdx/common/var/lib/redis" >> ./redis.conf
       echo "dbfilename dump.rdb" >> ./redis.conf
@@ -35,4 +38,4 @@ parts:
       cp ./redis.conf $SNAPCRAFT_PART_INSTALL/etc/redis/
   wrappers:
     plugin: dump
-    source: snap/
+    source: local/
